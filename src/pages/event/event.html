@@ -1,0 +1,55 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>New/Edit Evento</ion-title>
+        <ion-buttons end>
+          <button ion-button icon-only (click)="dismiss()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Tipo</ion-label>
+                <ion-select formControlName="eventType">
+                    <ion-option *ngFor="let option of selectOptions"
+                    [value]="option">{{ option }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Fecha</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" formControlName="eventDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Hora inicio</ion-label>
+                <ion-datetime displayFormat="HH:mm" formControlName="eventTimeInit"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Hora fin</ion-label>
+                <ion-datetime displayFormat="HH:mm" formControlName="eventTimeEnd"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Imagen</ion-label>
+                <ion-input
+                type="file"
+                formControlName="eventImage"
+                accept="image/*"
+                (change)="changeListener($event)"                
+                ></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+            <button
+            type="submit"
+            ion-button
+            block
+            [disabled]="!eventForm.valid || !eventForm.dirty"> Save/edit Evento</button>
+    </form>
+
+    </ion-content>
